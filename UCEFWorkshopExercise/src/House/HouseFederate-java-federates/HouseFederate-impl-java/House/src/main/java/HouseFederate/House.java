@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.SimpleTimeZone;
-
+import java.lang.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,6 +43,7 @@ public class House extends HouseBase {
 	Calendar dt = null;
 	Long thisTime;
 	int timezone = -5; // NY
+        int cnt=96;
 	String state = "NY";
 	DateTimeFormatter formatter = DateTimeFormatter.ISO_INSTANT;
 	
@@ -54,7 +55,7 @@ public class House extends HouseBase {
 	double SolarInsolation=0.0;	// direct solar irradiance
 
 	public double Qfixedload = 0.0; // constant fixed load
-	public double Ti = 21.0; // indoor temperature 'C
+	public double Ti = 17+15.0* Math.random();; // indoor temperature 'C
 	public double Tsp = 20.0; // temperature setpoint 'C
 	public double del = 0.5; // thermostat algorithm hysteresis 'C
 	public boolean heatpumprunning = false; // is heatpump running
@@ -128,7 +129,7 @@ public class House extends HouseBase {
 	
 	private void initializeTimeStep() {
 		
-		log.info("Initializing calendar time attributes");
+		//log.info("Initializing calendar time attributes");
 		
 		// initialize timezone support
 		int tzhours = timezone;// -7
@@ -146,11 +147,11 @@ public class House extends HouseBase {
 
 		// inistialize with startTime
 		dt.setTimeInMillis(startTime * 1000);// 1243929600 without -7 hours
-		log.debug("year=:" + dt.get(Calendar.YEAR)); // 2009
-		log.debug("month=:" + dt.get(Calendar.MONTH)); // 6
-		log.debug("Day: " + dt.get(Calendar.DAY_OF_MONTH)); // 2
-		log.debug("Hour: " + dt.get(Calendar.HOUR)); // 9
-		log.debug("Minute:" + dt.get(Calendar.MINUTE)); // 0
+		//log.debug("year=:" + dt.get(Calendar.YEAR)); // 2009
+		//log.debug("month=:" + dt.get(Calendar.MONTH)); // 6
+		//log.debug("Day: " + dt.get(Calendar.DAY_OF_MONTH)); // 2
+		//log.debug("Hour: " + dt.get(Calendar.HOUR)); // 9
+		//log.debug("Minute:" + dt.get(Calendar.MINUTE)); // 0
 
 
 		// get current time in msec and hrs this year
@@ -201,8 +202,8 @@ public class House extends HouseBase {
 		Tsp = configuration.tsp; // temperature setpoint 'C
 		Pfixedload = configuration.plugload; // plugload
 		solarpaneleffectivearea = configuration.solarpaneleffectivearea;
-		
-		log.info(
+	
+		/*log.info(
 				"uae: " + uae
 				+ ", del: " + del
 				+ ", tau: " + tau
@@ -212,7 +213,16 @@ public class House extends HouseBase {
 				+ ", houseeffectivearea: " + houseeffectivearea
 				+ ", solarpaneleffectivearea: " + solarpaneleffectivearea
 				);
+                 */
 
+              	String l =  "Net Power: "  
+                                +", Consumed Power:"
+                                + ", SolarPower: " 
+				+ ", To: " 
+				+ ", Ti: "
+				+ ", heatpumprunning: ";
+              
+               log.info(l);
         AdvanceTimeRequest atr = new AdvanceTimeRequest(currentTime);
         putAdvanceTimeRequest(atr);
 
@@ -239,7 +249,7 @@ public class House extends HouseBase {
         // it is used to break the loop so that latejoiner federates can
         // notify the federation manager that they left the federation
         boolean exitCondition = false;
-
+    
         while (true) {
             currentTime += super.getStepSize();
 
@@ -274,14 +284,24 @@ public class House extends HouseBase {
 				// send out state
 				vResourcePhysicalState.set_power(Ph);
 				vResourcePhysicalState.sendInteraction(getLRC(), currentTime);
-				
+				/*
 				String l = "CurrentTime: " + formatter.format(dt.toInstant()) 
-				+ ", Power: " + Ph 
+				+ ", Net Power: " + Ph 
+                                +", Consumed Power:"+(Php+Pfixedload)
+                                + ", SolarPower: "+Psolar
 				+ ", SolarInsolation: " + SolarInsolation 
 				+ ", To: " + To 
 				+ ", Ti: " + Ti
 				+ ", heatpumprunning: " + heatpumprunning;
-				log.info(l);
+*/ 
+                          String ll =   Ph 
+                                +","+(Php+Pfixedload)
+                                + ", "+Psolar 
+				+ ", " + To 
+				+ ", " + Ti
+				+ "," + heatpumprunning;
+
+				log.info(ll);
 	   		}
 
             // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -295,6 +315,7 @@ public class House extends HouseBase {
             if(exitCondition) {
                 break;
             }
+         cnt-=1;
         }
 
         // while loop finished, notify FederationManager about resign

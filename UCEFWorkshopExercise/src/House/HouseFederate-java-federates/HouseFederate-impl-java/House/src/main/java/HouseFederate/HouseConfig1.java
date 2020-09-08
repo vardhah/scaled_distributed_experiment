@@ -4,7 +4,7 @@ import org.cpswt.config.FederateConfig;
 import org.cpswt.config.FederateParameter;
 
 
-public class HouseConfig extends FederateConfig {
+public class HouseConfig1 extends FederateConfig {
 	@FederateParameter
 	public double uae = 172.0; // Lumped Thermal Resistance W per 'C
 	
@@ -24,14 +24,14 @@ public class HouseConfig extends FederateConfig {
 	public double solarconversionconstant = 1.0;
 	
 	@FederateParameter
-	public double tsp = 20.0; // temperature setpoint 'C
+	public double tsp = 22.0; // temperature setpoint 'C
 	
 	@FederateParameter
 	public double del=0.5;	// thermostat hysteresis
 	
 	@FederateParameter
-	public double plugload=800;	// plugload
+	public double plugload=1250;	// plugload
 	
 	@FederateParameter
-	public double solarpaneleffectivearea=14;
+	public double solarpaneleffectivearea=24;
 }

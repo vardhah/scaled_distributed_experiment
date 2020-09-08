@@ -11,9 +11,9 @@
   "houseeffectivearea": 6.84,
   "sghc": 0.89,
   "hpbasepower": 1571.0,
-  "tsp": 20.0,
+  "tsp": 24.0,
   "del": 0.5,
-  "plugload": 800,
-  "solarpaneleffectivearea": 14
+  "plugload": 1750,
+  "solarpaneleffectivearea": 36
 }
 

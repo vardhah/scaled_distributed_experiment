@@ -8,7 +8,7 @@
   "expectedFederates": [
     {
       "federateType": "House",
-      "count": 4
+      "count": 30
     },
     {
       "federateType": "Metronome",

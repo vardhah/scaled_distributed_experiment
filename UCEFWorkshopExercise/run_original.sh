@@ -84,11 +84,16 @@ cd $root_directory/src/Utility/UtilityFederate-java-federates/UtilityFederate-im
 xterm -fg green -bg black -l -lf $logs_directory/utility-${timestamp}.log -T "Utility" -geometry 140x40+300+150 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar Utility-0.1.0-SNAPSHOT.jar -configFile=conf/UtilityConfig.json" &
 waitUntilJoined Utility 1
 
-cd /src/House/HouseFederate-java-federates/HouseFederate-impl-java/House/target/xterm -fg cyan -bg black -l -lf /"house1"-.log -T "House 1" -geometry 140x40+600+300 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar House-0.1.0-SNAPSHOT.jar -configFile=conf/HouseConfig.json" &
+cd $root_directory/src/House/HouseFederate-java-federates/HouseFederate-impl-java/House/target/
+xterm -fg cyan -bg black -l -lf $logs_directory/house1-${timestamp}.log -T "House 1" -geometry 140x40+400+200 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar House-0.1.0-SNAPSHOT.jar -configFile=conf/HouseConfig.json" &
 waitUntilJoined House 1
-cd /src/House/HouseFederate-java-federates/HouseFederate-impl-java/House/target/xterm -fg cyan -bg black -l -lf /"house2"-.log -T "House 2" -geometry 140x40+600+300 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar House-0.1.0-SNAPSHOT.jar -configFile=conf/HouseConfig.json" &
+
+cd $root_directory/src/House/HouseFederate-java-federates/HouseFederate-impl-java/House/target/
+xterm -fg cyan -bg black -l -lf $logs_directory/house2-${timestamp}.log -T "House 2" -geometry 140x40+500+250 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar House-0.1.0-SNAPSHOT.jar -configFile=conf/HouseConfig.json" &
 waitUntilJoined House 2
-cd /src/House/HouseFederate-java-federates/HouseFederate-impl-java/House/target/xterm -fg cyan -bg black -l -lf /"house3"-.log -T "House 3" -geometry 140x40+600+300 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar House-0.1.0-SNAPSHOT.jar -configFile=conf/HouseConfig.json" &
+
+cd $root_directory/src/House/HouseFederate-java-federates/HouseFederate-impl-java/House/target/
+xterm -fg cyan -bg black -l -lf $logs_directory/house3-${timestamp}.log -T "House 3" -geometry 140x40+600+300 -e "java -Dlog4j.configurationFile=conf/log4j2.xml -Djava.net.preferIPv4Stack=true -jar House-0.1.0-SNAPSHOT.jar -configFile=conf/HouseConfig.json" &
 
 
 ##################################
