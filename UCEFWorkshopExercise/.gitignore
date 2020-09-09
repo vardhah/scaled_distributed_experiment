@@ -1,7 +1,6 @@
 # ignore these directories since they are built in compilation processes
 target/
 bin/
-logs/
 .classpath
 .settings/
 .DS_Store
@@ -9,7 +8,7 @@ logs/
 dependency-reduced-pom.xml
 *.*~
 Xterm.log.*
-*.log
+
 
 # we are using maven so .project should not be stored
 .project
